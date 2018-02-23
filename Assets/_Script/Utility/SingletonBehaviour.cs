@@ -8,7 +8,7 @@ namespace ImYellowFish.Utility
     {
         private static T _instance;
         public static T Instance { get { return _instance; } }
-        public bool dontDestroyOnLoad;
+        public bool dontDestroyOnLoad = true;
 
         protected virtual void Awake()
         {

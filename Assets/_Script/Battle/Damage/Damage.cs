@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Records the damage info.
+/// </summary>
 public class Damage{
     public Character source;
     public Character target;

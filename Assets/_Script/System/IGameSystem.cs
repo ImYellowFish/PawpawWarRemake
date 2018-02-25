@@ -2,14 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ImYellowFish.Utility;
 
 /// <summary>
 /// Subcomponents of the GameManager.
 /// </summary>
-public abstract class IGameSystem : MonoBehaviour{
-    public abstract void Init(GameManager manager);
-    public abstract void OnSceneLoaded(SceneInfo sceneInfo);
-    public abstract void CleanUp();
+public class IGameSystem : SlaveComponent<GameManager>{
+    /// <summary>
+    /// The relating game manager
+    /// </summary>
+    public GameManager gameManager
+    {
+        get { return host; }
+    }
+    
+    /// <summary>
+    /// Called when a new scene is loaded.
+    /// </summary>
+    public virtual void OnSceneLoaded(SceneInfo sceneInfo)
+    {
+
+    }
 }
 
 /// <summary>

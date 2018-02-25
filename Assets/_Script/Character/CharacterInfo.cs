@@ -11,6 +11,7 @@ public class CharacterInfo{
     public string prefabName;
     public bool willCreateController;
     public int team;
+    public Vector3 initialPos;
 
     public string prefabPath
     {

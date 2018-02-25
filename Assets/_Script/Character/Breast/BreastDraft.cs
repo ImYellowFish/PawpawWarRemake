@@ -81,9 +81,9 @@ public class BreastDraft : CharacterComponent
         hurtBoxMask = 1 << LayerMask.NameToLayer("HurtBox");
         boobMask = 1 << LayerMask.NameToLayer("Boob");
 
-        drawer.Init(this);
+        drawer.Init(null);
         // TODO:
-        constraint.Init(this);
+        constraint.Init(null);
     }
 
     void Update()
@@ -259,6 +259,6 @@ public class BreastDraft : CharacterComponent
 
     public void OnPlayerFlip()
     {
-        drawer.Update();
+        //drawer.Update();
     }
 }

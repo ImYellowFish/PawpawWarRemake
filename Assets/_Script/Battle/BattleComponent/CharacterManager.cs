@@ -10,7 +10,7 @@ using ImYellowFish.Utility;
 public class CharacterManager : BattleComponent {
     // settings
     // TODO: read from battle user context
-    public int playerCount = 4;
+    public int playerCount = 2;
 
     /// <summary>
     /// The list of all characters in the current scene
@@ -41,6 +41,7 @@ public class CharacterManager : BattleComponent {
             var info = CharacterInfo.GetDefault();
             info.willCreateController = i == 0;
             info.playerIndex = i;
+            info.initialPos = Vector3.right * 2 * i;
             CreateCharacter(info);
         }
     }
@@ -69,7 +70,7 @@ public class CharacterManager : BattleComponent {
             return null;
         }
 
-        var obj = Instantiate(prefab);
+        var obj = Instantiate(prefab, info.initialPos, Quaternion.identity);
         var character = obj.GetComponent<Character>();
         character.Init(info, battleManager);
         all.Add(character);

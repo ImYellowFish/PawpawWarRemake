@@ -96,6 +96,4 @@ public class CharacterMotor : CharacterComponent {
         v.x = Helper.ClampAbs(v.x, maxHorizontalSpeed);
         rb.velocity = v;
     }
-
-    
 }

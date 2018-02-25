@@ -1,0 +1,27 @@
+1.Hierachy
+
+Player
+--GroundCheck
+--Breast
+----Origin
+----Body
+
+2.Setup
+
+1) Player:
+Components
+--Collider
+--Rigidbody
+--Character
+--CharacterStat
+
+Tag: Player
+Layer: Player
+
+2)Breast/Body
+--Collider
+--Rigidbody
+--SpringJoint
+
+Tag: Breast
+Layer: Breast

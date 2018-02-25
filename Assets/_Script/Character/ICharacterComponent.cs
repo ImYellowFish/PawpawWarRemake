@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImYellowFish.Utility;
 
 public interface ICharacterComponent
 {
@@ -8,17 +9,13 @@ public interface ICharacterComponent
     void CleanUp();
 }
 
-public abstract class CharacterComponent : MonoBehaviour, ICharacterComponent
+public abstract class CharacterComponent : SlaveComponent<Character>, ICharacterComponent
 {
-    protected Character character;
-
-    public virtual void Init(Character ch)
+    public Character character
     {
-        this.character = ch;
-    }
-
-    public virtual void CleanUp()
-    {
-
+        get
+        {
+            return host;
+        }
     }
 }

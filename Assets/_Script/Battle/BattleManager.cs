@@ -9,11 +9,6 @@ using ImYellowFish.Utility;
 public class BattleManager : IGameSystem
 {
     /// <summary>
-    /// The relating game manager
-    /// </summary>
-    public GameManager gameManager;
-
-    /// <summary>
     /// The state of current Battle
     /// </summary>
     public enum State { Idle, Battle }
@@ -36,8 +31,8 @@ public class BattleManager : IGameSystem
     public BattleContext context;
 
     #region Battle components
-    [Header("Subcomponents")]
-    public List<BattleComponent> subComponents = new List<BattleComponent>();
+    // Sub components
+    public SlaveComponentContainer<BattleManager, BattleComponent> slaveContainer = new SlaveComponentContainer<BattleManager, BattleComponent>();
 
     /// <summary>
     /// The stateMachine for the battle.
@@ -79,7 +74,7 @@ public class BattleManager : IGameSystem
         this.level = level;
         this.context = context;
 
-        foreach (var sc in subComponents)
+        foreach (var sc in slaveContainer.Slaves)
         {
             sc.OnStartBattle();
         }
@@ -91,7 +86,7 @@ public class BattleManager : IGameSystem
     /// </summary>
     public void EndBattle()
     {
-        foreach (var sc in subComponents)
+        foreach (var sc in slaveContainer.Slaves)
         {
             sc.OnEndBattle();
         }
@@ -102,8 +97,7 @@ public class BattleManager : IGameSystem
     #region Lifecycle
     public override void Init(GameManager manager)
     {
-        this.gameManager = manager;
-
+        base.Init(manager);
         stateMachine = CreateSubComponent<BattleStateMachine>();
         characters = CreateSubComponent<CharacterManager>();
         stat = CreateSubComponent<BattleStatistics>();
@@ -112,26 +106,18 @@ public class BattleManager : IGameSystem
 
     public override void CleanUp()
     {
-        foreach (var sc in subComponents)
+        foreach (var sc in slaveContainer.Slaves)
         {
             sc.CleanUp();
         }
     }
-
-    public override void OnSceneLoaded(SceneInfo sceneInfo)
-    {
-
-    }
-
+    
     /// <summary>
     /// Create a battle component by type
     /// </summary>
     private T CreateSubComponent<T>() where T : BattleComponent
     {
-        var c = gameObject.AddComponent<T>();
-        c.Init(this);
-        subComponents.Add(c);
-        return c;
+        return slaveContainer.CreateSlaveComponent<T>(this);
     }
     #endregion
 }

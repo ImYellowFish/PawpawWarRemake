@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
     public bool debug_initOnAwake;
 
     #region Components
+    public SlaveComponentContainer<Character, CharacterComponent> slaveContainer = new SlaveComponentContainer<Character, CharacterComponent>();
+
     /// <summary>
     /// Battle related character stats, such as speed, hp etc.
     /// Includes init values and current values.
@@ -37,12 +39,19 @@ public class Character : MonoBehaviour
     /// </summary>
     [ReadOnly]
     public PlayerController controller;
+
+    /// <summary>
+    /// Manages everything about the breast
+    /// </summary>
+    [ReadOnly]
+    public Breast breast;
     #endregion
 
     #region Info
     /// <summary>
     /// The relating battleManager
     /// </summary>
+    [ReadOnly]
     public BattleManager battleManager;
 
     /// <summary>
@@ -119,13 +128,14 @@ public class Character : MonoBehaviour
         playerIndex = info.playerIndex;
 
         // Add sub components & init
-        stat = GetSubComponent<CharacterStat>();
-        motor = AddSubComponent<CharacterMotor>();
-        battler = AddSubComponent<Battler>();
+        stat = AddExistingSubComponent<CharacterStat>();
+        motor = CreateSubComponent<CharacterMotor>();
+        battler = CreateSubComponent<Battler>();
+        breast = CreateSubComponent<Breast>();
 
         // TODO: use character init param class to do this
         if (info.willCreateController)
-            controller = AddSubComponent<PlayerController>();
+            controller = CreateSubComponent<PlayerController>();
     }
 
     public void CleanUp()
@@ -154,23 +164,17 @@ public class Character : MonoBehaviour
     /// <summary>
     /// Creates and init a component
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    private T AddSubComponent<T>() where T : CharacterComponent
+    private T CreateSubComponent<T>() where T : CharacterComponent
     {
-        var cpt = gameObject.AddComponent<T>();
-        cpt.Init(this);
-        return cpt;
+        return slaveContainer.CreateSlaveComponent<T>(this);
     }
 
     /// <summary>
     /// Get and init an existing component 
     /// </summary>
-    private T GetSubComponent<T>() where T : CharacterComponent
+    private T AddExistingSubComponent<T>() where T : CharacterComponent
     {
-        var cpt = gameObject.GetComponent<T>();
-        cpt.Init(this);
-        return cpt;
+        return slaveContainer.AddExistingSlaveComponent<T>(this);
     }
 
     #endregion

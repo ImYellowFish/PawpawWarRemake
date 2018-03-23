@@ -111,10 +111,15 @@ public class BreastCollision : BreastComponent {
             damage = 0,
             target = target,
             source = host.character,
-            force = Vector3.zero,
+            force = GetCurrentForce(target),
         });
 
         collidePlayerCooldown.Activate(collisionCooldownDuration);
+    }
+
+    private Vector3 GetCurrentForce(Character target)
+    {
+        return host.rb_breast.velocity * 25f;
     }
 
     private void OnCollideBreast(RaycastHit hit)

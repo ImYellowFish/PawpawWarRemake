@@ -22,6 +22,7 @@ public class Breast : CharacterComponent {
     public BreastDrawer drawer;
     public BreastConstraint constraint;
     public BreastCollision collision;
+    public BreastHelpThruster helpThruster;
     #endregion
 
     #region Lifecycle
@@ -42,6 +43,7 @@ public class Breast : CharacterComponent {
         drawer = slaveContainer.CreateSlaveComponent<BreastDrawer>(this, tr_breastRoot.gameObject);
         constraint = slaveContainer.CreateSlaveComponent<BreastConstraint>(this, tr_breastRoot.gameObject);
         collision = slaveContainer.CreateSlaveComponent<BreastCollision>(this, tr_breastBody.gameObject);
+        helpThruster = slaveContainer.AddExistingSlaveComponent<BreastHelpThruster>(this, tr_breastRoot.gameObject);
     }
     #endregion
 }

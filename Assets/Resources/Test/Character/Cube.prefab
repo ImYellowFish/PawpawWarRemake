@@ -34,6 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4919611775130208}
+  - component: {fileID: 114707007881719340}
   m_Layer: 0
   m_Name: Breast
   m_TagString: Untagged
@@ -302,6 +303,86 @@ MonoBehaviour:
   jumpAcceleration: 300
   maxHorizontalSpeed: 10
   currentHp: 0
+--- !u!114 &114707007881719340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1451333105907976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8cd07399066534f8ecae867b6c8a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helpForceMag_vs_HelpAxis:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    unitX: 1
+    unitY: 1
+  helpForceMag_vs_BreastSpeed:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    unitX: 25
+    unitY: 1
+  helpForceMag_vs_BreastLength:
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    unitX: 2
+    unitY: 1
+  baseHelpForce: 5
+  currentHelpAxis: 0
+  currentHelpForce: {x: 0, y: 0, z: 0}
+  currentBreastSpeed: 0
+  currentBreastLength: 0
+  stopBreastButton: 0
 --- !u!114 &114712438292831720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,7 +417,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1821635494019540}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

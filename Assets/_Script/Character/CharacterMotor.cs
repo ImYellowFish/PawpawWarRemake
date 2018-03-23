@@ -21,7 +21,11 @@ public class CharacterMotor : CharacterComponent {
     // should there be more patterns or modes, we should abstract them into move modes class,
     // and take care of their interaction.
     private float maxHorizontalSpeed;
+
+    [SerializeField]
     private Vector3 currentExternForce;
+    public float currentMoveInputAxis;
+
 
     public override void Init(Character ch)
     {
@@ -64,6 +68,7 @@ public class CharacterMotor : CharacterComponent {
     public void Move(float axis)
     {
         AddForce(axis * character.stat.moveAcceleration * Vector3.right);
+        currentMoveInputAxis = axis;
     }
 
     public void SetMaxHorizontalSpeed(float value)
@@ -91,6 +96,7 @@ public class CharacterMotor : CharacterComponent {
         // apply and reset the force.
         rb.AddForce(currentExternForce);
         currentExternForce = Vector3.zero;
+        currentMoveInputAxis = 0;
 
         var v = rb.velocity;
         v.x = Helper.ClampAbs(v.x, maxHorizontalSpeed);

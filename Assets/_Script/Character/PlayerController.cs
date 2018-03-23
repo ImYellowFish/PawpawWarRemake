@@ -14,7 +14,8 @@ public class PlayerController : CharacterComponent {
     {
         horizontalAxis = Input.GetAxis("Horizontal");
         // TODO: do this in fixedUpdate?
-        character.motor.AddAcceleration(character.stat.moveAcceleration * horizontalAxis * Vector3.right);
+        character.motor.Move(horizontalAxis);
+        character.breast.helpThruster.currentHelpAxis = horizontalAxis;
 
         // TODO: Mario like jump
         if (Input.GetKeyDown(KeyCode.Space) && character.motor.isGrounded)

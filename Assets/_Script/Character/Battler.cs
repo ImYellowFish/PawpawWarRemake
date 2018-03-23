@@ -16,7 +16,7 @@ public class Battler : CharacterComponent
 
     public void TakeDamage(Damage damage)
     {
-
+        character.motor.AddForce(damage.force);
     }
 
     /// <summary>
